@@ -1,18 +1,14 @@
 import { decorate, observable, action } from 'mobx';
 import api from '../services/api';
-import { throwError } from 'rxjs';
 
 class MovieSearchStore {
-
-  // constructor() {
-  //   this.getMovies('avengers');
-  // }
 
   list = [];
   termSearch = '';
   resultTotal = 0;
   pageCurrent = 1;
   isLoading = false;
+  error = '';
 
   async getMovies(term = this.termSearch) {
     this.isLoading = true;
@@ -48,9 +44,8 @@ class MovieSearchStore {
       }
 
     } catch (error) {
-      console.log(error);
       this.isLoading = false;
-      return error;
+      this.error = error;
     }
 
   }
@@ -83,6 +78,7 @@ decorate(MovieSearchStore, {
   pageCurrent: observable,
   resultTotal: observable,
   isLoading: observable,
+  error: observable,
   changePage: action,
   getMovies: action,
   clearSearch: action

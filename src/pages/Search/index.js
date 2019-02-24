@@ -28,10 +28,9 @@ class Search extends Component {
       <Layout>
 
         <SearchBar />
-        <LayoutContainer>
-          {
-            !isLoading
-            &&
+        {
+          !isLoading
+          && <LayoutContainer>
             <MovieList>
               {list.map((movie) => (
                 <MovieItem
@@ -47,9 +46,8 @@ class Search extends Component {
               )
               )}
             </MovieList>
-
-          }
-        </LayoutContainer>
+          </LayoutContainer>
+        }
         <Loader>
           <StageSpinner size={30} color="#686769" loading={isLoading} />
         </Loader>
