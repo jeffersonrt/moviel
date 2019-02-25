@@ -47,7 +47,7 @@ class Paginate extends Component {
                         onPageChange: this.handlePageChange
                       })}
                     >
-                      Primeira página
+                      First
                     </ButtonPagination>
                   )
                 }
@@ -104,7 +104,7 @@ class Paginate extends Component {
                       onPageChange: this.handlePageChange
                     })}
                   >
-                    Última página
+                    Last
                   </ButtonPagination>
                 )}
               </ButtonsContainer>
