@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { observer, inject } from 'mobx-react';
+import { connect } from 'react-redux';
+
+import { searchMovies } from '../../stores/actions';
 
 import { FaSearch } from 'react-icons/fa';
 import { Layout, Button, Icon } from '../../elements';
@@ -10,15 +12,24 @@ import { FormContainer } from './styles';
 class SearchBar extends Component {
 
   state = {
-    searchInput: ''
+    inputSearchText: ''
+  }
+
+  componentDidMount(){
+    searchMovies('batman');
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (!this.state.searchInput) {
-      this.props.store.moviesearchstore.clearSearch();
+
+    const { searchMovies } = this.props;
+
+    if (!this.state.inputSearchText) {
+      // this.props.store.moviesearchstore.clearSearch();
     }
-    this.props.store.moviesearchstore.getMovies(this.state.searchInput);
+
+    searchMovies(this.state.inputSearchText);
+    // this.props.store.moviesearchstore.getMovies(this.state.inputSearchText);
   }
 
   render() {
@@ -26,7 +37,7 @@ class SearchBar extends Component {
       <Layout>
         <FormContainer>
           <form onSubmit={this.handleSubmit}>
-            <input value={this.state.searchInput} onChange={(e) => this.setState({ searchInput: e.target.value })} placeholder="Find a movie" />
+            <input value={this.state.inputSearchText} onChange={(e) => this.setState({ inputSearchText: e.target.value })} placeholder="Find a movie" />
             <Button type="submit"><Icon><FaSearch /></Icon></Button>
           </form>
         </FormContainer>
@@ -34,6 +45,6 @@ class SearchBar extends Component {
 
     );
   }
-
 }
-export default inject('store')(observer(SearchBar));
+
+export default connect(null, { searchMovies })(SearchBar);

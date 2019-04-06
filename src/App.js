@@ -1,29 +1,29 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from "mobx-react";
-import DevTools from 'mobx-react-devtools';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import './styles/global.css';
 
-// STORE
-import stores from './stores';
-
-// ROUTES
+// COMPONENTS
 import Header from './components/Header';
 import Routes from './routes';
+
+import reducers from './stores/reducers';
+const store = createStore(reducers, applyMiddleware(thunk));
 
 class App extends Component {
   render() {
     return (
-      <Provider store={{ ...stores }} >
+      <Provider store={store}>
         <BrowserRouter>
           <Fragment>
-            <DevTools />
             <Header />
             <Routes />
           </Fragment>
         </BrowserRouter >
-      </ Provider>
+      </Provider>
     );
   }
 }

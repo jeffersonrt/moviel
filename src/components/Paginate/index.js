@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { observer, inject } from 'mobx-react';
 import Pagination from 'react-paginating';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
@@ -12,8 +11,11 @@ import {
 } from './styles';
 
 class Paginate extends Component {
+
+  
   handlePageChange = (page, e) => {
-    this.props.store.moviesearchstore.changePage(page)
+
+    // this.props.store.moviesearchstore.changePage(page)
   };
 
   render() {
@@ -118,4 +120,4 @@ class Paginate extends Component {
 
 
 // export default Paginate;
-export default inject('store')(observer(Paginate));
+export default Paginate;

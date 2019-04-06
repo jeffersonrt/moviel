@@ -1,34 +1,51 @@
 import React, { Component } from 'react';
-import { observer, inject } from 'mobx-react';
+import { connect } from 'react-redux';
 
-import { StageSpinner } from "react-spinners-kit";
-
+// import { StageSpinner } from "react-spinners-kit";
 
 import SearchBar from '../../components/SearchBar';
-import Paginate from '../../components/Paginate';
-import MovieItem from '../../components/MovieItem';
+
+import MoviesList from '../../components/MoviesList';
 
 
 import {
   Layout,
   LayoutContainer,
   MovieList,
-  Loader
+  // Loader
 } from '../../elements';
 
 
 class Search extends Component {
 
   render() {
-
-    const { list, resultTotal, pageCurrent, isLoading } = this.props.store.moviesearchstore;
-    const { addFavorite, isFavorite } = this.props.store.favoritesstore;
-
+    const { searchResult, totalSearch } = this.props;
     return (
       <Layout>
-
         <SearchBar />
-        {
+        <LayoutContainer>
+          <MoviesList movies={searchResult} total={totalSearch} />
+        </LayoutContainer>
+      </Layout>
+    );
+  }
+
+}
+
+const mapStateToProps = (state) => {
+  return ({
+    searchResult: state.movies.search || [],
+    totalSearch: state.movies.totalResults
+  })
+};
+
+export default connect(mapStateToProps)(Search);
+
+
+
+
+
+{/* {
           !isLoading
           && <LayoutContainer>
             <MovieList>
@@ -59,16 +76,4 @@ class Search extends Component {
             limit={10}
             pageCount={5}
             currentPage={pageCurrent} />
-        }
-
-
-      </Layout>
-    );
-  }
-
-}
-
-// export default Search;
-export default inject('store')(observer(Search));
-
-
+        } */}
