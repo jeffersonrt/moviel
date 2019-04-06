@@ -1,11 +1,8 @@
 import React from 'react';
-
-// import { connect } from 'react-redux';
-
 import MovieItem from '../MovieItem';
 import Paginate from '../Paginate';
 
-const MoviesList = ({ total, movies }) => {
+const MoviesList = ({ total, movies, page = 1 }) => {
 
   return (
     <div>
@@ -14,19 +11,11 @@ const MoviesList = ({ total, movies }) => {
       ))}
       <Paginate
         total={total}
-        limit={10}
-        pageCount={5}
-        currentPage={1} />
+        currentPage={page} />
     </div>
   )
 
 }
-
-// const mapStateToProps = state => ({
-//   searchResult: state.movies.search || [],
-//   totalResults: state.movies.totalResults
-// });
-
 
 export default MoviesList;
 

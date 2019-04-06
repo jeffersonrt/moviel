@@ -4,14 +4,12 @@ import { connect } from 'react-redux';
 // import { StageSpinner } from "react-spinners-kit";
 
 import SearchBar from '../../components/SearchBar';
-
 import MoviesList from '../../components/MoviesList';
-
 
 import {
   Layout,
   LayoutContainer,
-  MovieList,
+  // MovieList,
   // Loader
 } from '../../elements';
 
@@ -19,12 +17,12 @@ import {
 class Search extends Component {
 
   render() {
-    const { searchResult, totalSearch } = this.props;
+    const { search, searchTotal, page } = this.props;
     return (
       <Layout>
         <SearchBar />
         <LayoutContainer>
-          <MoviesList movies={searchResult} total={totalSearch} />
+          <MoviesList movies={search} total={searchTotal} page={page} />
         </LayoutContainer>
       </Layout>
     );
@@ -34,8 +32,10 @@ class Search extends Component {
 
 const mapStateToProps = (state) => {
   return ({
-    searchResult: state.movies.search || [],
-    totalSearch: state.movies.totalResults
+    search: state.search.data || [],
+    searchTotal: state.search.totalResults,
+    page: state.search.currentPage,
+
   })
 };
 

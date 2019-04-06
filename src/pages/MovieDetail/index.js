@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { getMovie, addFavorite, removeFavorite } from '../../stores/actions';
+import { movieGet, addFavorite, removeFavorite } from '../../stores/actions';
 
 
 import { StageSpinner } from "react-spinners-kit";
@@ -24,12 +24,15 @@ import noposter from '../../assets/moviel-poster.jpg';
 class MovieDetail extends Component {
 
   componentDidMount() {
-    const { getMovie, match } = this.props;
-    getMovie(match.params.id);
+    const { movieGet, match } = this.props;
+    movieGet(match.params.id);
   }
 
   render() {
-    const { movie, isFavorite, addFavorite, removeFavorite } = this.props;
+    // console.log(this.props);
+
+    const { movie, loading, error, isFavorite, addFavorite, removeFavorite } = this.props;
+
     const buttonAction = isFavorite ? removeFavorite : addFavorite;
     const poster = movie['Poster'] === 'N/A' ? noposter : movie['Poster'];
     const star = isFavorite ? <FaStar /> : <FaRegStar />
@@ -71,12 +74,12 @@ class MovieDetail extends Component {
 
 }
 
-const mapStateToProps = (state, ownProps) => {
-  // console.log(state);
-  return ({
-    movie: state.movies,
-    isFavorite: state.favorites.findIndex(favorite => favorite['imdbID'] === state.movies['imdbID']) >= 0
-  })
-}
+const mapStateToProps = (state, ownProps) => ({
+  loading: state.movieDetail.loading,
+  movie: state.movieDetail.movie || {},
+  error: state.movieDetail.error,
+  isFavorite: state.favorites.findIndex(favorite => favorite['imdbID'] === ownProps.match.params.id) >= 0
+});
 
-export default connect(mapStateToProps, { getMovie, addFavorite, removeFavorite })(MovieDetail);
+
+export default connect(mapStateToProps, { movieGet, addFavorite, removeFavorite })(MovieDetail);

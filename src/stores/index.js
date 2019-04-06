@@ -1,9 +1,27 @@
-import MovieSearchStore from './MovieSearchStore';
-import FavoritesStore from './FavoritesStore';
-import MovieDetailStore from './MovieDetailStore';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 
-const moviesearchstore = new MovieSearchStore()
-const favoritesstore = new FavoritesStore()
-const moviedetailstore = new MovieDetailStore()
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-export default { moviesearchstore, favoritesstore, moviedetailstore }
+import rootReducer from './reducers';
+
+const persistConfig = {
+  key: 'favorites',
+  storage
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const middleware = applyMiddleware(
+  thunk,
+  createLogger({
+    collapsed: true
+  })
+);
+
+const store = createStore(persistedReducer, middleware);
+const persistor = persistStore(store);
+
+export { store, persistor };

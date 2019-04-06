@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { searchMovies } from '../../stores/actions';
+import { searchRequest } from '../../stores/actions';
 
 import { FaSearch } from 'react-icons/fa';
 import { Layout, Button, Icon } from '../../elements';
@@ -15,21 +15,16 @@ class SearchBar extends Component {
     inputSearchText: ''
   }
 
-  componentDidMount(){
-    searchMovies('batman');
-  }
 
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { searchMovies } = this.props;
-
+    const { searchRequest } = this.props;
     if (!this.state.inputSearchText) {
+      //
       // this.props.store.moviesearchstore.clearSearch();
     }
-
-    searchMovies(this.state.inputSearchText);
-    // this.props.store.moviesearchstore.getMovies(this.state.inputSearchText);
+    searchRequest(this.state.inputSearchText);
   }
 
   render() {
@@ -47,4 +42,4 @@ class SearchBar extends Component {
   }
 }
 
-export default connect(null, { searchMovies })(SearchBar);
+export default connect(null, { searchRequest })(SearchBar);
