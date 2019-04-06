@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// import { StageSpinner } from "react-spinners-kit";
+import { StageSpinner } from "react-spinners-kit";
+
+import { searchRequest } from '../../stores/actions';
 
 import SearchBar from '../../components/SearchBar';
-import MoviesList from '../../components/MoviesList';
+import Paginate from '../../components/Paginate';
+import MovieItem from '../../components/MovieItem';
 
 import {
   Layout,
@@ -13,16 +16,47 @@ import {
   // Loader
 } from '../../elements';
 
-
 class Search extends Component {
 
+  handlePageChange = (page, e) => {
+    e.preventDefault();
+    const { term, searchRequest } = this.props;
+    searchRequest(term, page);
+  };
+
+  pagination = () => {
+    const { searchTotal, page } = this.props;
+    if (searchTotal > 10) {
+      return <Paginate total={searchTotal} currentPage={page} handlePageChange={this.handlePageChange} />;
+    }
+  };
+
+  renderMoviesList = () => {
+    const { search, isLoading } = this.props;
+    if (!isLoading) {
+      return (
+        <div>
+          {search.map((movie) => (
+            <MovieItem key={movie['imdbID']} movie={movie} />
+          ))}
+          {this.pagination()}
+        </div>
+      );
+    }
+  }
+
   render() {
-    const { search, searchTotal, page } = this.props;
+    const { isLoading, error } = this.props;
     return (
       <Layout>
         <SearchBar />
         <LayoutContainer>
-          <MoviesList movies={search} total={searchTotal} page={page} />
+          {
+            error
+              ? <p>{error.message}</p>
+              : this.renderMoviesList()
+          }
+          <StageSpinner size={30} color="#686769" loading={isLoading} />
         </LayoutContainer>
       </Layout>
     );
@@ -35,45 +69,10 @@ const mapStateToProps = (state) => {
     search: state.search.data || [],
     searchTotal: state.search.totalResults,
     page: state.search.currentPage,
-
+    isLoading: state.search.loading,
+    error: state.search.error,
+    term: state.search.term
   })
 };
 
-export default connect(mapStateToProps)(Search);
-
-
-
-
-
-{/* {
-          !isLoading
-          && <LayoutContainer>
-            <MovieList>
-              {list.map((movie) => (
-                <MovieItem
-                  key={movie["imdbID"]}
-                  imdbID={movie["imdbID"]}
-                  type={movie["Type"]}
-                  title={movie["Title"]}
-                  year={movie["Year"]}
-                  poster={movie["Poster"]}
-                  favorite={isFavorite(movie)}
-                  addFavorite={() => { addFavorite(movie) }}
-                />
-              )
-              )}
-            </MovieList>
-          </LayoutContainer>
-        }
-        <Loader>
-          <StageSpinner size={30} color="#686769" loading={isLoading} />
-        </Loader>
-
-        {
-          !isLoading
-          && <Paginate
-            total={resultTotal}
-            limit={10}
-            pageCount={5}
-            currentPage={pageCurrent} />
-        } */}
+export default connect(mapStateToProps, { searchRequest })(Search);

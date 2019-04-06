@@ -20,10 +20,7 @@ class SearchBar extends Component {
     e.preventDefault();
 
     const { searchRequest } = this.props;
-    if (!this.state.inputSearchText) {
-      //
-      // this.props.store.moviesearchstore.clearSearch();
-    }
+    if (!this.state.inputSearchText) { return }
     searchRequest(this.state.inputSearchText);
   }
 

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+
 import Pagination from 'react-paginating';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-
-import { searchRequest } from '../../stores/actions';
 
 import { colors } from '../../styles';
 
@@ -15,15 +13,15 @@ import {
 
 class Paginate extends Component {
 
-  handlePageChange = (page, e) => {
-    e.preventDefault();
-    const { term, searchRequest } = this.props;
-    searchRequest(term, page);
-  };
-
   render() {
 
-    const { total, limit = 10, pageCount = 3, currentPage = 1 } = this.props;
+    const {
+      total,
+      limit = 10,
+      pageCount = 3,
+      currentPage = 1,
+      handlePageChange
+    } = this.props;
 
     return (
       <PaginationContainer>
@@ -49,7 +47,7 @@ class Paginate extends Component {
                     <ButtonPagination
                       {...getPageItemProps({
                         pageValue: 1,
-                        onPageChange: this.handlePageChange
+                        onPageChange: handlePageChange
                       })}
                     >
                       First
@@ -61,7 +59,7 @@ class Paginate extends Component {
                   <ButtonPagination
                     {...getPageItemProps({
                       pageValue: previousPage,
-                      onPageChange: this.handlePageChange
+                      onPageChange: handlePageChange
                     })}
                   >
                     <FaChevronLeft />
@@ -84,7 +82,7 @@ class Paginate extends Component {
                         pageValue: page,
                         key: page,
                         style: activePage,
-                        onPageChange: this.handlePageChange
+                        onPageChange: handlePageChange
                       })}
                     >
                       {page}
@@ -96,7 +94,7 @@ class Paginate extends Component {
                   <ButtonPagination
                     {...getPageItemProps({
                       pageValue: nextPage,
-                      onPageChange: this.handlePageChange
+                      onPageChange: handlePageChange
                     })}
                   >
                     <FaChevronRight />
@@ -106,7 +104,7 @@ class Paginate extends Component {
                   <ButtonPagination
                     {...getPageItemProps({
                       pageValue: totalPages,
-                      onPageChange: this.handlePageChange
+                      onPageChange: handlePageChange
                     })}
                   >
                     Last
@@ -121,8 +119,4 @@ class Paginate extends Component {
 
 };
 
-const mapStateToProps = state => ({
-  term: state.search.term
-})
-
-export default connect(mapStateToProps, { searchRequest })(Paginate);
+export default Paginate;

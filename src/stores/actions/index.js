@@ -32,7 +32,7 @@ export const searchRequest = (term, page = 1) => async dispatch => {
     });
 
     if (response.data.Response === "False") {
-      throw new Error('Nenhum filme encontrado');
+      throw new Error(response.data.Error);
     }
 
     const movies = await unique(response.data.Search, 'imdbID');
@@ -43,22 +43,9 @@ export const searchRequest = (term, page = 1) => async dispatch => {
     }));
 
   } catch (error) {
-
-    console.log(error);
     dispatch(searchFailure(error));
   }
 }
-
-// export const searchPagination = (page, term) => dispatch =>  {
-
-//   dispatch({
-//     type: 'search/PAGINATION',
-//     payload: { currentPage: page }
-//   });
-
-//   dispatch(searchRequest(term, page));
-
-// };
 
 
 // MOVIE DETAIL ACTIONS
@@ -75,7 +62,7 @@ const movieFailure = (error) => ({
 
 
 export const movieGet = (id) => async dispatch => {
-  dispatch({ type: 'search/GET' });
+  dispatch({ type: 'movie/GET' });
 
   try {
     const response = await api.get('', {
@@ -85,7 +72,7 @@ export const movieGet = (id) => async dispatch => {
     });
     dispatch(movieSuccess(response.data));
   } catch (error) {
-    dispatch(movieFailure('Ops, estamos rebubinando esse filme, tente novamente mais tarde.'));
+    dispatch(movieFailure('This movie is not available now, try again later.'));
   }
 }
 

@@ -35,7 +35,6 @@ const Logo = styled(Link)`
   transition: all .2s ease-in-out;
 
   img {
-    width:60px;
     height:60px;
   }
 

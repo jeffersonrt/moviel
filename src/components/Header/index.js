@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
-import { observer } from 'mobx-react';
+import { NavLink, withRouter } from 'react-router-dom';
 import { FaRegStar, FaSearch } from 'react-icons/fa';
 
 import {
@@ -15,7 +14,7 @@ import {
   PageHeaderContainer,
 } from './styles';
 
-import logoSymbol from '../../assets/moviel-icon.svg';
+import logoSymbol from '../../assets/moviel-logo.svg';
 
 
 class Header extends Component {
@@ -26,11 +25,11 @@ class Header extends Component {
         <PageHeaderContainer>
           <Logo to="/">
             <img src={logoSymbol} alt="Moviel" />
-            <h1>moviel</h1>
+
           </Logo>
           <span>
-            <CustomLink to="/"><Icon><FaSearch /></Icon></CustomLink>
-            <CustomLink to="/favorites"><IconFav><FaRegStar /></IconFav></CustomLink>
+            <NavLink exact activeClassName="menu-active" to="/">Search</NavLink>
+            <NavLink exact activeClassName="menu-active" to="/favorites">Favorites</NavLink>
           </span>
         </PageHeaderContainer>
       </PageHeader>
@@ -38,4 +37,4 @@ class Header extends Component {
   }
 }
 
-export default withRouter(observer(Header));
+export default withRouter(Header);

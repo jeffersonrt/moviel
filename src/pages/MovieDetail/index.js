@@ -29,10 +29,7 @@ class MovieDetail extends Component {
   }
 
   render() {
-    // console.log(this.props);
-
-    const { movie, loading, error, isFavorite, addFavorite, removeFavorite } = this.props;
-
+    const { movie, isLoading, isFavorite, addFavorite, removeFavorite } = this.props;
     const buttonAction = isFavorite ? removeFavorite : addFavorite;
     const poster = movie['Poster'] === 'N/A' ? noposter : movie['Poster'];
     const star = isFavorite ? <FaStar /> : <FaRegStar />
@@ -40,34 +37,34 @@ class MovieDetail extends Component {
     return (
       <Layout>
         <LayoutContainer>
-          {/* {!isLoading && */}
-          <Fragment>
-            <Aside>
-              <img src={poster} alt={`${movie['Title']} - ${movie['Year']}`} />
-              <p><strong>Rating:</strong> {movie['imdbRating']}</p>
-              <p><strong>Year:</strong> {movie['Year']}</p>
-              <p><strong>Genre:</strong> {movie['Genre']}</p>
-              <p><strong>Runtime:</strong> {movie['Runtime']}</p>
-              <p><strong>Director:</strong> {movie['Director']}</p>
-              <p><strong>Country:</strong> {movie['Country']}</p>
-              <p><strong>Language:</strong> {movie['Language']}</p>
-            </Aside>
+          {!isLoading &&
+            <Fragment>
+              <Aside>
+                <img src={poster} alt={`${movie['Title']} - ${movie['Year']}`} />
+                <p><strong>Rating:</strong> {movie['imdbRating']}</p>
+                <p><strong>Year:</strong> {movie['Year']}</p>
+                <p><strong>Genre:</strong> {movie['Genre']}</p>
+                <p><strong>Runtime:</strong> {movie['Runtime']}</p>
+                <p><strong>Director:</strong> {movie['Director']}</p>
+                <p><strong>Country:</strong> {movie['Country']}</p>
+                <p><strong>Language:</strong> {movie['Language']}</p>
+              </Aside>
 
-            <Column>
-              <MovieHeader>
-                <MovieTitle>{movie['Title']}</MovieTitle>
-                <ButtonFav size={30} onClick={() => buttonAction(movie)}><IconFav>{star}</IconFav></ButtonFav>
-              </MovieHeader>
-              <p>{movie['Plot']}</p>
-              <p><strong>Writer:</strong> {movie['Writer']}</p>
-              <p><strong>Actors:</strong> {movie['Actors']}</p>
-            </Column>
-          </Fragment>
-          {/* } */}
+              <Column>
+                <MovieHeader>
+                  <MovieTitle>{movie['Title']}</MovieTitle>
+                  <ButtonFav size={30} onClick={() => buttonAction(movie)}><IconFav>{star}</IconFav></ButtonFav>
+                </MovieHeader>
+                <p>{movie['Plot']}</p>
+                <p><strong>Writer:</strong> {movie['Writer']}</p>
+                <p><strong>Actors:</strong> {movie['Actors']}</p>
+              </Column>
+            </Fragment>
+          }
         </LayoutContainer>
-        {/* <Loader>
+        <Loader>
           <StageSpinner size={30} color="#686769" loading={isLoading} />
-        </Loader> */}
+        </Loader>
       </Layout>
     );
   }
@@ -75,7 +72,7 @@ class MovieDetail extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  loading: state.movieDetail.loading,
+  isLoading: state.movieDetail.loading,
   movie: state.movieDetail.movie || {},
   error: state.movieDetail.error,
   isFavorite: state.favorites.findIndex(favorite => favorite['imdbID'] === ownProps.match.params.id) >= 0

@@ -8,8 +8,9 @@ import storage from 'redux-persist/lib/storage';
 import rootReducer from './reducers';
 
 const persistConfig = {
-  key: 'favorites',
-  storage
+  key: '@Moviel:favorites',
+  storage,
+  whitelist: ['favorites']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
