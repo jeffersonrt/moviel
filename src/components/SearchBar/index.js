@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { searchRequest } from '../../stores/actions';
+import { searchRequest, searchClear } from '../../stores/actions';
 
 import { FaSearch } from 'react-icons/fa';
 import { Wrapper, Button, Icon } from '../../elements';
@@ -18,8 +18,10 @@ class SearchBar extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { searchRequest } = this.props;
-    if (!this.state.inputSearchText) { return }
+    const { searchRequest, searchClear } = this.props;
+    if (!this.state.inputSearchText) { 
+      return searchClear(); 
+    }
     searchRequest(this.state.inputSearchText);
   }
 
@@ -40,4 +42,4 @@ class SearchBar extends Component {
   }
 }
 
-export default connect(null, { searchRequest })(SearchBar);
+export default connect(null, { searchRequest, searchClear })(SearchBar);

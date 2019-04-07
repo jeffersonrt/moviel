@@ -38,10 +38,15 @@ export const Button = styled.button`
 
 
 export const ButtonFav = styled(Button)`
+  cursor:pointer;
   position: ${props => props.position || 'relative'};
   top :${props => props.top || 'auto'}px;
   right:${props => props.right || 'auto'}px;
   z-index:999;
+
+    &:focus{
+      outline:none;
+    }
 
    svg {
     width: ${props => props.size || '20'}px;

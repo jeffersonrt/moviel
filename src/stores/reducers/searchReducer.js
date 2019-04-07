@@ -29,6 +29,9 @@ export default (state = initalState, action) => {
         error: action.payload.error,
         currentPage: 1
       };
+    case 'search/CLEAR':
+      return initalState;
+      
     default:
       return state;
   }

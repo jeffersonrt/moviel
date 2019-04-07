@@ -20,6 +20,11 @@ const searchFailure = error => ({
   }
 });
 
+export const searchClear = () => ({
+  type: 'search/CLEAR',
+});
+
+
 export const searchRequest = (term, page = 1) => async dispatch => {
   dispatch({ type: 'search/REQUEST', payload: { term } });
 

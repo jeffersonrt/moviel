@@ -16,7 +16,9 @@ import {
   Column,
   MovieHeader,
   MovieTitle,
-  IconFav
+  IconFav,
+  ColumnsContainer,
+  Rating
 } from './styles';
 import noposter from '../../assets/moviel-poster.jpg';
 
@@ -37,10 +39,9 @@ class MovieDetail extends Component {
       <Page>
         <Wrapper>
           {!isLoading &&
-            <Fragment>
+            <ColumnsContainer>
               <Aside>
                 <img src={poster} alt={`${movie['Title']} - ${movie['Year']}`} />
-                <p><strong>Rating:</strong> {movie['imdbRating']}</p>
                 <p><strong>Year:</strong> {movie['Year']}</p>
                 <p><strong>Genre:</strong> {movie['Genre']}</p>
                 <p><strong>Runtime:</strong> {movie['Runtime']}</p>
@@ -52,13 +53,14 @@ class MovieDetail extends Component {
               <Column>
                 <MovieHeader>
                   <MovieTitle>{movie['Title']}</MovieTitle>
+                  <Rating><p><strong>{movie['imdbRating']}</strong></p></Rating>
                   <ButtonFav size={30} onClick={() => buttonAction(movie)}><IconFav>{star}</IconFav></ButtonFav>
                 </MovieHeader>
                 <p>{movie['Plot']}</p>
                 <p><strong>Writer:</strong> {movie['Writer']}</p>
                 <p><strong>Actors:</strong> {movie['Actors']}</p>
               </Column>
-            </Fragment>
+            </ColumnsContainer>
           }
           <StageSpinner size={30} color="#686769" loading={isLoading} />
         </Wrapper>

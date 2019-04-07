@@ -18,6 +18,11 @@ import {
   Message
 } from '../../elements';
 
+import {
+  Column
+} from './styles';
+
+
 class Search extends Component {
 
   // componentDidMount(){
@@ -40,7 +45,7 @@ class Search extends Component {
 
   renderMoviesList = () => {
     const { search, isLoading } = this.props;
-    if (!isLoading) {
+    if (!isLoading && search.length > 0) {
       return (
         <Content>
           <MoviesList>
@@ -54,6 +59,20 @@ class Search extends Component {
     }
   }
 
+  showInitialMessage = () => {
+    const { error, search } = this.props;
+    if (search.length === 0 && !error) {
+      return <Message>Start you research on the search bar above! Enjoy :)</Message>
+    }
+  }
+
+  showError = () => {
+    const { isLoading, error } = this.props;
+    if (!isLoading) {
+      return <Error>{error.message}</Error>
+    }
+  }
+
   render() {
     const { isLoading, error, search } = this.props;
     return (
@@ -62,10 +81,10 @@ class Search extends Component {
         <Wrapper>
           {
             error
-              ? <Error>{!isLoading && error.message}</Error>
+              ? this.showError()
               : this.renderMoviesList()
           }
-          {/* {search.length === 0 && <Message>Start .</Message> } */}
+          {this.showInitialMessage()}
           <StageSpinner size={30} color="#686769" loading={isLoading} />
         </Wrapper>
       </Page>

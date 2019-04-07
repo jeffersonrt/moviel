@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import { Icon } from '../../elements';
 import { colors, metrics } from '../../styles';
 
-const Column = styled.section`
+export const Column = styled.section`
   color: ${colors.dark};
   padding: ${metrics.basePadding}px;
 `;
 
-const Aside = styled.aside`
+export const Aside = styled.aside`
+  position:relative;
   color: ${colors.dark};
   padding: ${metrics.basePadding}px;
   img {
@@ -15,21 +16,21 @@ const Aside = styled.aside`
   }
 `;
 
-const MovieHeader = styled.header`
+export const MovieHeader = styled.header`
   display:flex;
   align-items:center;
 
 `;
 
-const MovieTitle = styled.h1`
+export const MovieTitle = styled.h1`
   color: ${colors.dark};
   margin:0;
   padding:0;
 `;
 
-const IconFav = styled(Icon)`
+export const IconFav = styled(Icon)`
 
-    margin-left:${metrics.baseMargin / 2}px;
+  margin-left:${metrics.baseMargin / 2}px;
 
   svg {
     width:30px;
@@ -43,10 +44,29 @@ const IconFav = styled(Icon)`
 
 `;
 
-export {
-  Column,
-  Aside,
-  MovieHeader,
-  MovieTitle,
-  IconFav
-};
+export const ColumnsContainer = styled.div`
+  display:flex;
+
+  @media (max-width: ${metrics.baseSmall}) {
+    flex-direction: column-reverse;
+  }
+`;
+
+export const Rating = styled.div`
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-left:${metrics.baseMargin/2}px;
+  width:40px;
+  height:40px;
+  border-radius:20px;
+  background:${colors.dark};
+
+  p {
+    font-size:1.2em;
+    color:${colors.white};
+  }
+
+`;
+
+

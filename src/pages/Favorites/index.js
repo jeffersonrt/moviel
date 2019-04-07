@@ -4,7 +4,13 @@ import { connect } from 'react-redux';
 import MovieItem from '../../components/MovieItem';
 import Paginate from '../../components/Paginate';
 
-import { Page, MoviesList, Wrapper, Content, Message } from '../../elements';
+import { 
+  Page, 
+  MoviesList, 
+  Wrapper, 
+  Content, 
+  Message 
+} from '../../elements';
 
 class Favorite extends Component {
 
