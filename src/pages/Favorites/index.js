@@ -12,7 +12,7 @@ import {
   Wrapper,
   Content,
   Message
-} from '../../elements';
+} from '../../styles/elements';
 
 class Favorite extends Component {
 
@@ -22,7 +22,7 @@ class Favorite extends Component {
   }
 
   static defaultProps = {
-    favorites: [ ]
+    favorites: []
   }
 
   state = {

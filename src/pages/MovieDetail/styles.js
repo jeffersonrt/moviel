@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Icon } from '../../elements';
+import { Icon } from '../../styles/elements';
 import { colors, metrics } from '../../styles';
 
 export const Column = styled.section`

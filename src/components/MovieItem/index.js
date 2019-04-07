@@ -9,7 +9,7 @@ import { addFavorite, removeFavorite } from '../../stores/actions';
 
 import {
   ButtonFav
-} from '../../elements';
+} from '../../styles/elements';
 
 import {
   MovieCard,

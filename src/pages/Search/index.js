@@ -17,7 +17,7 @@ import {
   Content,
   Error,
   Message
-} from '../../elements';
+} from '../../styles/elements';
 
 class Search extends Component {
 
@@ -28,7 +28,9 @@ class Search extends Component {
     searchTotal: PropTypes.number,
     page: PropTypes.number,
     isLoading: PropTypes.bool,
-    error: PropTypes.string,
+    error: PropTypes.shape({
+      message: PropTypes.string
+    }),
   }
 
   handlePageChange = (page, e) => {
@@ -61,8 +63,8 @@ class Search extends Component {
   }
 
   showInitialMessage = () => {
-    const { error, search } = this.props;
-    if (search.length === 0 && !error) {
+    const { error, search, isLoading } = this.props;
+    if (search.length === 0 && !error && !isLoading) {
       return <Message>Start you research on the search bar above! Enjoy :)</Message>
     }
   }

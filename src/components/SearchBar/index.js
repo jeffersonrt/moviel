@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { searchRequest, searchClear } from '../../stores/actions';
 
 import { FaSearch } from 'react-icons/fa';
-import { Wrapper, Button, Icon } from '../../elements';
+import { Wrapper, Button, Icon } from '../../styles/elements';
 import { FormContainer, SearchContainer } from './styles';
 
 

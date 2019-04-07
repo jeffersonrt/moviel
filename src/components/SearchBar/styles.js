@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Page } from '../../elements';
+import { Page } from '../../styles/elements';
 import { colors, metrics } from '../../styles';
 
 export const SearchContainer = styled(Page)`
@@ -31,6 +31,6 @@ export const FormContainer = styled.div`
       }
     }
   }
-  
+
 `;
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { colors, metrics } from '../../styles';
-import { Button } from '../../elements';
+import { Button } from '../../styles/elements';
 
 
 export const PaginationContainer = styled.div`

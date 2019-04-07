@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import Routes from './routes';
 
-import { GlobalStyle } from './elements';
+import { GlobalStyle } from './styles/elements';
 
 class App extends Component {
   render() {
@@ -14,7 +14,7 @@ class App extends Component {
         <Fragment>
           <Header />
           <Routes />
-          <GlobalStyle/>
+          <GlobalStyle />
         </Fragment>
       </BrowserRouter >
     );

@@ -10,7 +10,7 @@ import {
   Page,
   Wrapper,
   ButtonFav,
-} from '../../elements';
+} from '../../styles/elements';
 import {
   Aside,
   Column,

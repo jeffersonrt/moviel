@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 import { colors, metrics } from '../../styles';
-import { Wrapper } from '../../elements';
+import { Wrapper } from '../../styles/elements';
 
 
 export const PageHeader = styled.header`
