@@ -7,10 +7,9 @@ import { movieGet, addFavorite, removeFavorite } from '../../stores/actions';
 import { StageSpinner } from "react-spinners-kit";
 import { FaRegStar, FaStar } from 'react-icons/fa';
 import {
-  Layout,
-  LayoutContainer,
+  Page,
+  Wrapper,
   ButtonFav,
-  Loader
 } from '../../elements';
 import {
   Aside,
@@ -35,8 +34,8 @@ class MovieDetail extends Component {
     const star = isFavorite ? <FaStar /> : <FaRegStar />
 
     return (
-      <Layout>
-        <LayoutContainer>
+      <Page>
+        <Wrapper>
           {!isLoading &&
             <Fragment>
               <Aside>
@@ -61,11 +60,10 @@ class MovieDetail extends Component {
               </Column>
             </Fragment>
           }
-        </LayoutContainer>
-        <Loader>
           <StageSpinner size={30} color="#686769" loading={isLoading} />
-        </Loader>
-      </Layout>
+        </Wrapper>
+
+      </Page>
     );
   }
 

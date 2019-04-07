@@ -1,58 +1,74 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { colors, metrics } from '../../styles';
-import { LayoutContainer } from '../../elements';
+import { Wrapper } from '../../elements';
 
 
-const PageHeader = styled.section`
-  display:flex;
+export const PageHeader = styled.header`
+  display: flex;
+  position:relative;
+  height: 100px;
   justify-content:center;
-  padding:${metrics.basePadding / 2}px ${metrics.basePadding}px;
+  background-color:${colors.white};
+  /* box-shadow: 0px -2px 8px 5px ${colors.darkTransparent}; */
+  z-index:999;
+
+  @media (max-width: ${metrics.baseSmall}) {
+    height: 120px;
+  }
+
 `;
 
-const PageHeaderContainer = styled(LayoutContainer)`
-  justify-content:space-between;
-  span {
-    display:flex;
-    justify-content:center;
-    align-items:center;
+export const WrapperHeader = styled(Wrapper)`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 
+  @media (max-width: ${metrics.baseSmall}) {
+    flex-direction: column;
+  }
+
+`;
+
+export const Logo = styled(NavLink)`
+  transition: all .2s ease-in-out;
+
+  img {
+    width:auto;
+    height:60px;
+  }
+
+  &:hover {
+    transform:scale(1.05);
+  }
+
+`;
+
+export const Navegation = styled.div`
+  display:flex;
+  flex:1;
+  justify-content:flex-end;
+
+  a {
+    padding: ${metrics.basePadding}px ${metrics.baseMargin / 2}px;
+    margin-left: ${metrics.baseMargin}px;
+    color: ${colors.dark};
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .menu-active {
+    font-weight: bold;
+    color: ${colors.black};;
+  }
+
+  @media (max-width: ${metrics.baseSmall}) {
     a {
-      margin:${metrics.baseMargin / 2}px;
-      padding:${metrics.basePadding / 2}px;
+      padding: ${metrics.basePadding / 2}px;
     }
   }
 
 `;
 
-const Logo = styled(Link)`
 
-  display:inline-flex;
-  align-items:center;
-  text-decoration:none;
-  color: ${colors.primary};
-  transition: all .2s ease-in-out;
-
-  img {
-    height:60px;
-  }
-
-  h1 {
-    margin:0;
-    padding:0;
-    font-size:2em;
-    font-weight:400;
-  }
-
-  &:hover {
-    transform:scale(1.1);
-  }
-
-`;
-
-export {
-  PageHeader,
-  Logo,
-  PageHeaderContainer,
-};

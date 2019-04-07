@@ -1,82 +1,43 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { colors, metrics } from '../styles';
 
+export const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+  }
 
-const Layout = styled.div`
-  display:flex;
-  flex-direction:column;
-  padding:0 ${metrics.basePadding}px;
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: ${colors.lighter};
+  }
+  #root {}
 `;
 
-const LayoutContainer = styled.div`
-  display:flex;
+export const Wrapper = styled.div`
   flex:1;
+  display: flex;
+  justify-content:center;
   max-width: ${metrics.baseWidth}px;
+  padding: ${metrics.basePadding / 2}px ${metrics.basePadding}px;
 `;
 
-const CustomLink = styled(Link)`
-  text-decoration:none;
+export const Page = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
-const Button = styled.button`
+
+export const Button = styled.button`
   appearance: none;
   border:none;
-  background:none;
-  cursor:pointer;
-
-`;
-
-const Loader = styled.div`
-  display:flex;
-  justify-content:center;
-  padding:${metrics.basePadding}px;
-`;
-
-const Icon = styled.div`
-
-  svg {
-    width:24px;
-    height:24px;
-    path {
-      fill:${colors.regular};
-    }
-  }
-
-`;
-
-const IconFav = styled(Icon)`
-
-  svg {
-    width:30px;
-    height:30px;
-    stroke-width:16px;
-    stroke:${colors.regular};
-    path {
-      fill:${colors.regular};
-    }
-  }
-
+  background:${colors.transparent};
 `;
 
 
-const MovieList = styled.div`
-  display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 1rem;
-  width:100%;
-  align-self: center;
-  margin-top:${metrics.baseMargin}px;
-  padding:0 ${metrics.basePadding}px;
-  max-width: ${metrics.baseWidth}px;
-
-  img {
-    width:100%;
-  }
-
-`;
-
-const ButtonFav = styled(Button)`
+export const ButtonFav = styled(Button)`
   position: ${props => props.position || 'relative'};
   top :${props => props.top || 'auto'}px;
   right:${props => props.right || 'auto'}px;
@@ -91,22 +52,44 @@ const ButtonFav = styled(Button)`
   }
 `;
 
-const Message = styled.h3`
-  color:${colors.regular};
-  text-align:center;
+export const Message = styled.h3`
+  color: ${colors.dark};
 `;
 
+export const Error = styled(Message)`
+  color: ${colors.danger};
+`;
 
-export {
-  Layout,
-  LayoutContainer,
-  Button,
-  ButtonFav,
-  Loader,
-  CustomLink,
-  Icon,
-  IconFav,
-  MovieList,
-  Message
+export const MoviesList = styled.div`
+  flex:1;
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-gap: 1rem;
+`;
 
-};
+export const Content = styled.div`
+  flex:1;
+`;
+
+export const Icon = styled.div`
+  svg {
+    width:24px;
+    height:24px;
+    path {
+      fill:${colors.light};
+    }
+  }
+`;
+
+export const IconFav = styled(Icon)`
+  svg {
+    width:30px;
+    height:30px;
+    stroke-width:16px;
+    stroke:${colors.regular};
+    path {
+      fill:${colors.regular};
+    }
+  }
+`;
+

@@ -4,4 +4,8 @@ export default {
   baseMargin: 20,
   basePadding: 20,
   baseRadius: 5,
+  baseBig: '1024px',
+  baseMedium: '839px',
+  baseSmall: '480px',
+
 };

@@ -72,8 +72,7 @@ class Paginate extends Component {
                     activePage = {
                       fontWeight: 'bold',
                       color: colors.dark,
-                      borderRadius: 30,
-                      backgroundColor: colors.primary,
+                      border: `3px solid ${colors.dark}` 
                     };
                   }
                   return (

@@ -1,37 +1,27 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import { FaRegStar, FaSearch } from 'react-icons/fa';
-
-import {
-  Icon,
-  IconFav,
-  CustomLink
-} from '../../elements';
 
 import {
   Logo,
   PageHeader,
-  PageHeaderContainer,
+  WrapperHeader,
+  Navegation,
 } from './styles';
 
-import logoSymbol from '../../assets/moviel-logo.svg';
-
+import logoMoviel from '../../assets/moviel-logo.svg';
 
 class Header extends Component {
 
   render() {
     return (
       <PageHeader>
-        <PageHeaderContainer>
-          <Logo to="/">
-            <img src={logoSymbol} alt="Moviel" />
-
-          </Logo>
-          <span>
+        <WrapperHeader>
+          <Logo to="/"><img src={logoMoviel} alt="Moviel" /></Logo>
+          <Navegation>
             <NavLink exact activeClassName="menu-active" to="/">Search</NavLink>
             <NavLink exact activeClassName="menu-active" to="/favorites">Favorites</NavLink>
-          </span>
-        </PageHeaderContainer>
+          </Navegation>
+        </WrapperHeader>
       </PageHeader>
     );
   }

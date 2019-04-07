@@ -1,16 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addFavorite, removeFavorite } from '../../stores/actions';
+import { NavLink } from 'react-router-dom';
 
 import { FaRegStar, FaStar } from 'react-icons/fa';
 
+import { addFavorite, removeFavorite } from '../../stores/actions';
+
 import {
-  CustomLink,
   ButtonFav
 } from '../../elements';
 
 import {
-  MovieCard
+  MovieCard,
+  ImageContainer,
+
 } from './styles';
 
 import noposter from '../../assets/moviel-poster.jpg';
@@ -24,13 +27,14 @@ const MovieItem = ({ movie, isFavorite, addFavorite, removeFavorite }) => {
   return (
     <MovieCard>
       <ButtonFav position="absolute" top={10} right={10} onClick={() => buttonAction(movie)}>{star}</ButtonFav>
-      <CustomLink to={`movie/${movie['imdbID']}`}>
-        <img src={moviePoster} alt={`Poster - ${movie['Title']}`} />
+      <NavLink to={`movie/${movie['imdbID']}`}>
+        <ImageContainer>
+          <img src={moviePoster} alt={`Poster - ${movie['Title']}`} />
+        </ImageContainer>
         <span>{movie['Year']}</span>
         <h2>{movie['Title']}</h2>
-      </CustomLink>
+      </NavLink>
     </MovieCard>
-
   )
 };
 

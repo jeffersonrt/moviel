@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { searchRequest } from '../../stores/actions';
 
 import { FaSearch } from 'react-icons/fa';
-import { Layout, Button, Icon } from '../../elements';
-import { FormContainer } from './styles';
+import { Wrapper, Button, Icon } from '../../elements';
+import { FormContainer, SearchContainer } from './styles';
 
 
 
@@ -14,7 +14,6 @@ class SearchBar extends Component {
   state = {
     inputSearchText: ''
   }
-
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -26,14 +25,16 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <Layout>
-        <FormContainer>
-          <form onSubmit={this.handleSubmit}>
-            <input value={this.state.inputSearchText} onChange={(e) => this.setState({ inputSearchText: e.target.value })} placeholder="Find a movie" />
-            <Button type="submit"><Icon><FaSearch /></Icon></Button>
-          </form>
-        </FormContainer>
-      </Layout>
+      <SearchContainer>
+        <Wrapper>
+          <FormContainer>
+            <form onSubmit={this.handleSubmit}>
+              <input value={this.state.inputSearchText} onChange={(e) => this.setState({ inputSearchText: e.target.value })} placeholder="Find a movie" />
+              <Button type="submit"><Icon><FaSearch /></Icon></Button>
+            </form>
+          </FormContainer>
+        </Wrapper>
+      </SearchContainer>
 
     );
   }

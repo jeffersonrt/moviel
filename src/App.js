@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import './styles/global.css';
-
 // COMPONENTS
 import Header from './components/Header';
 import Routes from './routes';
+
+import { GlobalStyle } from './elements';
 
 class App extends Component {
   render() {
@@ -14,6 +14,7 @@ class App extends Component {
         <Fragment>
           <Header />
           <Routes />
+          <GlobalStyle/>
         </Fragment>
       </BrowserRouter >
     );

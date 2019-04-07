@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import MovieItem from '../../components/MovieItem';
 import Paginate from '../../components/Paginate';
 
-import { Layout, MovieList, LayoutContainer, Message } from '../../elements';
+import { Page, MoviesList, Wrapper, Content, Message } from '../../elements';
 
 class Favorite extends Component {
 
@@ -31,38 +31,31 @@ class Favorite extends Component {
     const end = start + 10;
     const favoritePaginate = favorites.slice(start, end);
 
-    // // console.log(favoritePaginate.length);
-    // if (page > 1 && favoritePaginate.length === 0 ){
-    //   // this.handlePageChange(page-1);
-    //   let start = (page - 2) * 10;
-    //   let end = start + 10;
-    //   let favoritePaginate = favorites.slice(start, end);
-    // }
-
     return (
-      <div>
-        {favoritePaginate.map((movie) => (
-          <MovieItem key={movie['imdbID']} movie={movie} />
-        ))}
+      <Content>
+        <MoviesList>
+          {favoritePaginate.map((movie) => (
+            <MovieItem key={movie['imdbID']} movie={movie} />
+          ))}
+        </MoviesList>
         {this.pagination()}
-      </div>
+      </Content>
     );
 
   }
 
   render() {
     const { totalFavoritos } = this.props;
-
     return (
-      <Layout>
-        {
-          totalFavoritos > 0
-            ? <LayoutContainer>
-              {this.renderMoviesList()}
-            </LayoutContainer>
-            : <Message>You don't have any favorite movie yet.</Message>
-        }
-      </Layout>
+      <Page>
+        <Wrapper>
+          {
+            totalFavoritos > 0
+              ? this.renderMoviesList()
+              : <Message>You don't have any favorite movie yet.</Message>
+          }
+        </Wrapper>
+      </Page>
     );
   }
 

@@ -1,24 +1,14 @@
 import styled from 'styled-components';
 import { colors } from '../../styles';
 
-const MovieCard = styled.div`
-
+export const MovieCard = styled.div`
   position:relative;
+  background:${colors.white};
   transition: all .2s ease-in-out;
-
-  &::before{
-    content:'';
-    position:absolute;
-    width:100%;
-    height: 50%;
-    pointer-events:none;
-    background: linear-gradient(to bottom, ${colors.darkTransparent} 0%, ${colors.transparent}  100% ) ;
-  }
 
   &:hover {
     transform:scale(1.05);
   }
-
 
   h2 {
     text-align:center;
@@ -39,11 +29,31 @@ const MovieCard = styled.div`
     color: ${colors.white};
   }
 
-
 `;
 
+export const ImageContainer = styled.div`
+  position:relative;
+  min-height:340px;
+  overflow: hidden;
 
-export {
-  MovieCard,
+  &:before{
+    content:'';
+    position:absolute;
+    width:100%;
+    height: 50%;
+    pointer-events:none;
+    z-index:99;
+    background: linear-gradient(to bottom, ${colors.darkTransparent} 0%, ${colors.transparent}  100% ) ;
+  }
 
-};
+  img {
+    position: absolute;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate( -50%, -50%);
+  }
+`;
+

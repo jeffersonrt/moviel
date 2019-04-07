@@ -10,13 +10,20 @@ import Paginate from '../../components/Paginate';
 import MovieItem from '../../components/MovieItem';
 
 import {
-  Layout,
-  LayoutContainer,
-  // MovieList,
-  // Loader
+  Page,
+  Wrapper,
+  MoviesList,
+  Content,
+  Error,
+  Message
 } from '../../elements';
 
 class Search extends Component {
+
+  // componentDidMount(){
+  //   const { searchRequest } = this.props;
+  //   searchRequest('star wars', 1);
+  // }
 
   handlePageChange = (page, e) => {
     e.preventDefault();
@@ -35,30 +42,33 @@ class Search extends Component {
     const { search, isLoading } = this.props;
     if (!isLoading) {
       return (
-        <div>
-          {search.map((movie) => (
-            <MovieItem key={movie['imdbID']} movie={movie} />
-          ))}
+        <Content>
+          <MoviesList>
+            {search.map((movie) => (
+              <MovieItem key={movie['imdbID']} movie={movie} />
+            ))}
+          </MoviesList>
           {this.pagination()}
-        </div>
+        </Content>
       );
     }
   }
 
   render() {
-    const { isLoading, error } = this.props;
+    const { isLoading, error, search } = this.props;
     return (
-      <Layout>
+      <Page>
         <SearchBar />
-        <LayoutContainer>
+        <Wrapper>
           {
             error
-              ? <p>{error.message}</p>
+              ? <Error>{!isLoading && error.message}</Error>
               : this.renderMoviesList()
           }
+          {/* {search.length === 0 && <Message>Start .</Message> } */}
           <StageSpinner size={30} color="#686769" loading={isLoading} />
-        </LayoutContainer>
-      </Layout>
+        </Wrapper>
+      </Page>
     );
   }
 
