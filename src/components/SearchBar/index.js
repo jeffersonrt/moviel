@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { searchRequest, searchClear } from '../../stores/actions';
 
@@ -10,6 +11,11 @@ import { FormContainer, SearchContainer } from './styles';
 
 
 class SearchBar extends Component {
+
+  static propTypes = {
+    searchRequest: PropTypes.func.isRequired,
+    searchClear: PropTypes.func.isRequired,
+  }
 
   state = {
     inputSearchText: ''

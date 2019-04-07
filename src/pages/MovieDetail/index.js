@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { movieGet, addFavorite, removeFavorite } from '../../stores/actions';
-
 
 import { StageSpinner } from "react-spinners-kit";
 import { FaRegStar, FaStar } from 'react-icons/fa';
@@ -20,9 +20,27 @@ import {
   ColumnsContainer,
   Rating
 } from './styles';
+
 import noposter from '../../assets/moviel-poster.jpg';
 
 class MovieDetail extends Component {
+
+  static propTypes = {
+    movie: PropTypes.object.isRequired,
+    isLoading: PropTypes.bool,
+    isFavorite: PropTypes.bool,
+    addFavorite: PropTypes.func.isRequired,
+    removeFavorite: PropTypes.func.isRequired,
+    movieGet: PropTypes.func.isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.shape({ id: PropTypes.string }),
+    }).isRequired,
+  }
+  
+
+  static defaultProps = {
+    movie: {}
+  }
 
   componentDidMount() {
     const { movieGet, match } = this.props;

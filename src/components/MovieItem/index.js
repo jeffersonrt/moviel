@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { FaRegStar, FaStar } from 'react-icons/fa';
 
@@ -13,7 +14,6 @@ import {
 import {
   MovieCard,
   ImageContainer,
-
 } from './styles';
 
 import noposter from '../../assets/moviel-poster.jpg';
@@ -36,6 +36,13 @@ const MovieItem = ({ movie, isFavorite, addFavorite, removeFavorite }) => {
       </NavLink>
     </MovieCard>
   )
+};
+
+MovieItem.propTypes = {
+  movie: PropTypes.object.isRequired,
+  isFavorite: PropTypes.bool,
+  addFavorite: PropTypes.func.isRequired,
+  removeFavorite: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => ({

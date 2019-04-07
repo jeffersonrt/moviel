@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import MovieItem from '../../components/MovieItem';
 import Paginate from '../../components/Paginate';
 
-import { 
-  Page, 
-  MoviesList, 
-  Wrapper, 
-  Content, 
-  Message 
+
+import {
+  Page,
+  MoviesList,
+  Wrapper,
+  Content,
+  Message
 } from '../../elements';
 
 class Favorite extends Component {
+
+  static propTypes = {
+    favorites: PropTypes.array,
+    totalFavoritos: PropTypes.number,
+  }
+
+  static defaultProps = {
+    favorites: [ ]
+  }
 
   state = {
     page: 1
@@ -69,7 +80,7 @@ class Favorite extends Component {
 
 const mapStateToProps = (state) => {
   return ({
-    favorites: state.favorites || [],
+    favorites: state.favorites,
     totalFavoritos: state.favorites.length
   })
 };

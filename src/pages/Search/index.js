@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { StageSpinner } from "react-spinners-kit";
@@ -18,17 +19,17 @@ import {
   Message
 } from '../../elements';
 
-import {
-  Column
-} from './styles';
-
-
 class Search extends Component {
 
-  // componentDidMount(){
-  //   const { searchRequest } = this.props;
-  //   searchRequest('star wars', 1);
-  // }
+  static propTypes = {
+    term: PropTypes.string.isRequired,
+    searchRequest: PropTypes.func.isRequired,
+    search: PropTypes.arrayOf(PropTypes.object).isRequired,
+    searchTotal: PropTypes.number,
+    page: PropTypes.number,
+    isLoading: PropTypes.bool,
+    error: PropTypes.string,
+  }
 
   handlePageChange = (page, e) => {
     e.preventDefault();
@@ -74,7 +75,7 @@ class Search extends Component {
   }
 
   render() {
-    const { isLoading, error, search } = this.props;
+    const { isLoading, error } = this.props;
     return (
       <Page>
         <SearchBar />

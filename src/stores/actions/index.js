@@ -1,9 +1,7 @@
 import api from '../../services/api';
 import { unique } from '../../utils';
 
-
 // SEARCH ACTIONS
-
 const searchSuccess = (result) => ({
   type: 'search/SUCCESS',
   payload: {
@@ -23,7 +21,6 @@ const searchFailure = error => ({
 export const searchClear = () => ({
   type: 'search/CLEAR',
 });
-
 
 export const searchRequest = (term, page = 1) => async dispatch => {
   dispatch({ type: 'search/REQUEST', payload: { term } });
@@ -52,9 +49,7 @@ export const searchRequest = (term, page = 1) => async dispatch => {
   }
 }
 
-
 // MOVIE DETAIL ACTIONS
-
 const movieSuccess = (movie) => ({
   type: 'movie/SUCCESS',
   payload: { movie }
@@ -64,7 +59,6 @@ const movieFailure = (error) => ({
   type: 'movie/FAILURE',
   payload: { error }
 });
-
 
 export const movieGet = (id) => async dispatch => {
   dispatch({ type: 'movie/GET' });
@@ -82,7 +76,6 @@ export const movieGet = (id) => async dispatch => {
 }
 
 // FAVORITES ACTIONS
-
 export const addFavorite = movie => ({
   type: 'favorites/ADD',
   payload: movie
