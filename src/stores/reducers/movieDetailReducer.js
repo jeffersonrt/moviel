@@ -2,7 +2,7 @@ const initalState = {
   movie: null,
   loading: false,
   error: null
-}
+};
 
 export default (state = initalState, action) => {
   switch (action.type) {
@@ -15,4 +15,4 @@ export default (state = initalState, action) => {
     default:
       return state;
   }
-}
+};

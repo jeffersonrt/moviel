@@ -5,7 +5,7 @@ const initalState = {
   term: '',
   error: null,
   currentPage: 1
-}
+};
 
 export default (state = initalState, action) => {
   switch (action.type) {
@@ -18,7 +18,7 @@ export default (state = initalState, action) => {
         totalResults: action.payload.totalResults,
         currentPage: action.payload.currentPage,
         loading: false,
-        error: null,
+        error: null
       };
     case 'search/FAILURE':
       return {
@@ -31,8 +31,8 @@ export default (state = initalState, action) => {
       };
     case 'search/CLEAR':
       return initalState;
-      
+
     default:
       return state;
   }
-}
+};

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { StageSpinner } from "react-spinners-kit";
+import { StageSpinner } from 'react-spinners-kit';
 
 import { searchRequest } from '../../stores/actions';
 
@@ -20,7 +20,6 @@ import {
 } from '../../styles/elements';
 
 class Search extends Component {
-
   static propTypes = {
     term: PropTypes.string.isRequired,
     searchRequest: PropTypes.func.isRequired,
@@ -30,8 +29,8 @@ class Search extends Component {
     isLoading: PropTypes.bool,
     error: PropTypes.shape({
       message: PropTypes.string
-    }),
-  }
+    })
+  };
 
   handlePageChange = (page, e) => {
     e.preventDefault();
@@ -42,7 +41,13 @@ class Search extends Component {
   pagination = () => {
     const { searchTotal, page } = this.props;
     if (searchTotal > 10) {
-      return <Paginate total={searchTotal} currentPage={page} handlePageChange={this.handlePageChange} />;
+      return (
+        <Paginate
+          total={searchTotal}
+          currentPage={page}
+          handlePageChange={this.handlePageChange}
+        />
+      );
     }
   };
 
@@ -52,7 +57,7 @@ class Search extends Component {
       return (
         <Content>
           <MoviesList>
-            {search.map((movie) => (
+            {search.map(movie => (
               <MovieItem key={movie['imdbID']} movie={movie} />
             ))}
           </MoviesList>
@@ -60,21 +65,23 @@ class Search extends Component {
         </Content>
       );
     }
-  }
+  };
 
   showInitialMessage = () => {
     const { error, search, isLoading } = this.props;
     if (search.length === 0 && !error && !isLoading) {
-      return <Message>Start you research on the search bar above! Enjoy :)</Message>
+      return (
+        <Message>Start you research on the search bar above! Enjoy :)</Message>
+      );
     }
-  }
+  };
 
   showError = () => {
     const { isLoading, error } = this.props;
     if (!isLoading) {
-      return <Error>{error.message}</Error>
+      return <Error>{error.message}</Error>;
     }
-  }
+  };
 
   render() {
     const { isLoading, error } = this.props;
@@ -82,29 +89,27 @@ class Search extends Component {
       <Page>
         <SearchBar />
         <Wrapper>
-          {
-            error
-              ? this.showError()
-              : this.renderMoviesList()
-          }
+          {error ? this.showError() : this.renderMoviesList()}
           {this.showInitialMessage()}
           <StageSpinner size={30} color="#686769" loading={isLoading} />
         </Wrapper>
       </Page>
     );
   }
-
 }
 
-const mapStateToProps = (state) => {
-  return ({
+const mapStateToProps = state => {
+  return {
     search: state.search.data || [],
     searchTotal: state.search.totalResults,
     page: state.search.currentPage,
     isLoading: state.search.loading,
     error: state.search.error,
     term: state.search.term
-  })
+  };
 };
 
-export default connect(mapStateToProps, { searchRequest })(Search);
+export default connect(
+  mapStateToProps,
+  { searchRequest }
+)(Search);
